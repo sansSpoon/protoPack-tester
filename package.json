@@ -1,0 +1,16 @@
+{
+	"name": "protopack",
+	"version": "0.1.0",
+	"description": "A basic boiler for Webpack enabled projects",
+	"private": true,
+	"scripts": {
+		"build": "webpack --config webpack.config.js"
+	},
+	"author": "sansSpoon",
+	"license": "ISC",
+	"devDependencies": {
+		"webpack": "^4.12.2",
+		"webpack-cli": "^3.0.8",
+		"webpack-dev-server": "^3.1.4"
+	}
+}
