@@ -1,21 +1,25 @@
 {
 	"name": "protopack",
 	"version": "0.1.0",
-	"description": "A basic boiler for Webpack enabled projects",
+	"description": "A basic boiler for Webpack enabled projects - vanilla front-end",
 	"private": true,
 	"scripts": {
-		"build": "webpack --config webpack.config.js"
+		"build": "webpack --config webpack.config.js; exit 0"
 	},
 	"author": "sansSpoon",
 	"license": "ISC",
 	"devDependencies": {
 		"webpack": "^4.12.2",
 		"webpack-cli": "^3.0.8",
-		"webpack-dev-server": "^3.1.4"
-	},
-	"dependencies": {
+		"webpack-dev-server": "^3.1.4",
 		"babel-core": "^6.26.3",
 		"babel-loader": "^7.1.4",
-		"babel-preset-env": "^1.7.0"
-	}
+		"babel-preset-env": "^1.7.0",
+		"babel-preset-airbnb": "^2.5.1",
+		"eslint": "^4.19.1",
+		"eslint-loader": "^2.0.0",
+		"eslint-plugin-import": "^2.13.0",
+		"eslint-config-airbnb-base": "^13.0.0"
+	},
+	"dependencies": {}
 }
