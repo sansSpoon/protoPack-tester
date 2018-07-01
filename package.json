@@ -4,7 +4,8 @@
 	"description": "A basic boiler for Webpack enabled projects - vanilla front-end",
 	"private": true,
 	"scripts": {
-		"build": "webpack --config webpack.config.js; exit 0"
+		"build": "webpack --config webpack.config.js --mode production; exit 0",
+		"dev":   "webpack --config webpack.config.js --mode development --watch"
 	},
 	"author": "sansSpoon",
 	"license": "ISC",
