@@ -23,6 +23,7 @@
 		"max-len": "off",
 		"no-underscore-dangle": "off",
 		"no-tabs": "off",
+		"no-multiple-empty-lines": ["error", { "max": 5, "maxEOF": 0 }],
 		
 		//Best Practice
 		"consistent-return": "off",

@@ -5,22 +5,27 @@
 	"private": true,
 	"scripts": {
 		"build": "webpack --config webpack.config.js --mode production; exit 0",
-		"dev":   "webpack --config webpack.config.js --mode development --watch"
+		"dev": "webpack --config webpack.config.js --mode development --watch"
 	},
 	"author": "sansSpoon",
 	"license": "ISC",
 	"devDependencies": {
-		"webpack": "^4.12.2",
-		"webpack-cli": "^3.0.8",
-		"webpack-dev-server": "^3.1.4",
 		"babel-core": "^6.26.3",
 		"babel-loader": "^7.1.4",
-		"babel-preset-env": "^1.7.0",
 		"babel-preset-airbnb": "^2.5.1",
+		"babel-preset-env": "^1.7.0",
+		"css-loader": "^0.28.11",
 		"eslint": "^4.19.1",
+		"eslint-config-airbnb-base": "^13.0.0",
 		"eslint-loader": "^2.0.0",
 		"eslint-plugin-import": "^2.13.0",
-		"eslint-config-airbnb-base": "^13.0.0"
+		"extract-loader": "^2.0.1",
+		"file-loader": "^1.1.11",
+		"postcss-loader": "^2.1.5",
+		"style-loader": "^0.21.0",
+		"webpack": "^4.12.2",
+		"webpack-cli": "^3.0.8",
+		"webpack-dev-server": "^3.1.4"
 	},
 	"dependencies": {}
 }

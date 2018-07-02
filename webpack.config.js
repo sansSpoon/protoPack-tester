@@ -11,6 +11,27 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.css$/,
+				use: [
+					{
+						loader: 'style-loader/url',
+						options: {
+							//singleton: true,
+						},
+					},
+					{
+						loader: 'file-loader',
+						options: {
+							name: '[name].[ext]',
+							outputPath: '../css/',
+							publicPath: 'assets/css/'
+						},
+					},
+					'extract-loader',
+					'css-loader',
+				],
+			},
+			{
 				test: /\.js$/,
 				exclude: /node_modules/,
 				use: [
