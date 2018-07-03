@@ -1,4 +1,5 @@
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
 	target: 'web', // 'node' | 'web'
@@ -11,6 +12,21 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.scss$/,
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+/*
+						options: {
+							publicPath: '../css/',
+						},
+*/
+					},
+					'css-loader',
+					'sass-loader',
+				],
+			},
+			/*{
 				test: /\.css$/,
 				use: [
 					{
@@ -30,7 +46,7 @@ module.exports = {
 					'extract-loader',
 					'css-loader',
 				],
-			},
+			},*/
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
@@ -68,4 +84,12 @@ module.exports = {
 			},
 		],
 	},
+	plugins: [
+		new MiniCssExtractPlugin({
+			// Options similar to the same options in webpackOptions.output
+			// both options are optional
+			//filename: "../css/[name].css",
+			chunkFilename: "[id].css"
+		})
+	]
 };

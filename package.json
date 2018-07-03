@@ -4,8 +4,8 @@
 	"description": "A basic boiler for Webpack enabled projects - vanilla front-end",
 	"private": true,
 	"scripts": {
-		"build": "webpack --config webpack.config.js --mode production; exit 0",
-		"dev": "webpack --config webpack.config.js --mode development --watch"
+		"build": "webpack --config webpack.config.prd.js --mode production",
+		"dev": "webpack --config webpack.config.dev.js --mode development"
 	},
 	"author": "sansSpoon",
 	"license": "ISC",
@@ -21,7 +21,11 @@
 		"eslint-plugin-import": "^2.13.0",
 		"extract-loader": "^2.0.1",
 		"file-loader": "^1.1.11",
+		"mini-css-extract-plugin": "^0.4.1",
+		"node-sass": "^4.9.0",
 		"postcss-loader": "^2.1.5",
+		"resolve-url-loader": "^2.3.0",
+		"sass-loader": "^7.0.3",
 		"style-loader": "^0.21.0",
 		"webpack": "^4.12.2",
 		"webpack-cli": "^3.0.8",

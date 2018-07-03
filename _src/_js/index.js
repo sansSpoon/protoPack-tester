@@ -1,3 +1,12 @@
-// console.log('foo');
+import '../_sass/style.css';
 
-[1, 2, 3].map((n) => n ** 2);
+function component() {
+	const element = document.createElement('div');
+
+	element.innerHTML = ['Hello', 'World'].join(' ');
+	element.classList.add('hello');
+
+	return element;
+}
+
+document.body.appendChild(component());
