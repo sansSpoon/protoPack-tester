@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-	// devtool: "source-map",
+	devtool: "source-map",
 	target: 'web',
 	mode: 'development',
 	entry: './_src/_js/index.js',
@@ -12,28 +12,24 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.css$/,
+				test: /\.scss$/,
 				use: [
 					{
 						loader: 'style-loader',
 					},
 					{
 						loader: 'css-loader',
-/*
 						options: {
 							sourceMap: true,
 						},
-*/
 					},
-/*
-					'resolve-url-loader',
+					// 'resolve-url-loader',
 					{
 						loader: 'sass-loader',
 						options: {
 							sourceMap: true,
 						},
 					}
-*/
 				],
 			},
 			{

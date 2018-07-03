@@ -16,11 +16,9 @@ module.exports = {
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader,
-/*
 						options: {
 							publicPath: '../css/',
 						},
-*/
 					},
 					'css-loader',
 					'sass-loader',
@@ -47,6 +45,19 @@ module.exports = {
 					'css-loader',
 				],
 			},*/
+			{
+				test: /\.(png|svg|jpg|gif)$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							name: '[name].[ext]',
+							outputPath: '../chrome/',
+							publicPath: 'assets/chrome/',
+						},
+					},
+				]
+			},
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
@@ -88,7 +99,7 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			// Options similar to the same options in webpackOptions.output
 			// both options are optional
-			//filename: "../css/[name].css",
+			filename: "../css/[name].css",
 			chunkFilename: "[id].css"
 		})
 	]
