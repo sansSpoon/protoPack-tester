@@ -1,13 +1,18 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin'); //dev only
+
+const publicPath = '/';
 
 module.exports = {
 	target: 'web', // 'node' | 'web'
 	//mode: 'development', // 'production' | 'development' | 'none' // > Moved to package.json scripts
 	entry: './_src/_js/index.js',
 	output: {
-		filename: 'main.js',
-		path: path.resolve(__dirname, 'public/assets/js/')
+		filename: 'assets/js/[name].js',
+		path: path.resolve(__dirname, 'public'),
+		publicPath: publicPath,
 	},
 	module: {
 		rules: [
@@ -16,9 +21,11 @@ module.exports = {
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader,
+/*
 						options: {
-							publicPath: '../css/',
+							publicPath: 'assets/css/',
 						},
+*/
 					},
 					'css-loader',
 					'sass-loader',
@@ -51,9 +58,9 @@ module.exports = {
 					{
 						loader: 'file-loader',
 						options: {
-							name: '[name].[ext]',
-							outputPath: '../chrome/',
-							publicPath: 'assets/chrome/',
+							name: 'assets/chrome/[name].[ext]',
+							// outputPath: '../chrome/',
+							//publicPath: 'assets/chrome/',
 						},
 					},
 				]
@@ -99,8 +106,13 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			// Options similar to the same options in webpackOptions.output
 			// both options are optional
-			filename: "../css/[name].css",
+			filename: "assets/css/[name].css",
 			chunkFilename: "[id].css"
-		})
+		}),
+		new HtmlWebpackPlugin({
+			inject: true,
+			template: path.resolve(__dirname, '_src/_html/index.html'),
+		}),
+		new CleanWebpackPlugin(['public']),
 	]
 };

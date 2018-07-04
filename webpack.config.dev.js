@@ -1,4 +1,8 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin'); //dev only
+
+const publicPath = '/';
 
 module.exports = {
 	devtool: "source-map",
@@ -7,7 +11,9 @@ module.exports = {
 	entry: './_src/_js/index.js',
 	output: {
 		filename: 'main.js',
-		path: path.resolve(__dirname, 'public/assets/js/')
+		pathinfo: true,
+		path: path.resolve(__dirname, 'public/assets/js/'),
+		publicPath: publicPath,
 	},
 	module: {
 		rules: [
@@ -82,4 +88,8 @@ module.exports = {
 			},
 		],
 	},
+	plugins: [
+		new HtmlWebpackPlugin(),
+		//new CleanWebpackPlugin(['dist']),
+	],
 };
