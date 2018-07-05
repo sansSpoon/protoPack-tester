@@ -2,17 +2,17 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin'); //dev only
 
-const publicPath = '/';
+const publicPath = '';
 
 module.exports = {
 	devtool: "source-map",
-	target: 'web',
-	mode: 'development',
+	target: 'web', // 'node' | 'web'
+	// mode: 'development', //mode: 'development', // 'production' | 'development' | 'none' // > Moved to package.json scripts
 	entry: './_src/_js/index.js',
 	output: {
-		filename: 'main.js',
+		filename: 'assets/js/[name].js',
 		pathinfo: true,
-		path: path.resolve(__dirname, 'public/assets/js/'),
+		path: path.resolve(__dirname, 'public'),
 		publicPath: publicPath,
 	},
 	module: {
@@ -42,11 +42,12 @@ module.exports = {
 				test: /\.(png|svg|jpg|gif)$/,
 				use: [
 					{
-						loader: 'file-loader',
+						loader: 'url-loader',
 						options: {
-							name: '[name].[ext]',
-							outputPath: '../chrome/',
-							publicPath: 'assets/chrome/',
+							name: 'assets/chrome/[name].[ext]',
+							limit: 8192,
+							// fallback: 'responsive-loader',
+							
 						},
 					},
 				]
@@ -89,7 +90,10 @@ module.exports = {
 		],
 	},
 	plugins: [
-		new HtmlWebpackPlugin(),
-		//new CleanWebpackPlugin(['dist']),
+		new HtmlWebpackPlugin({
+			inject: true,
+			template: path.resolve(__dirname, '_src/_html/index.html'),
+		}),
+		new CleanWebpackPlugin(['public']), // might not be needed
 	],
 };

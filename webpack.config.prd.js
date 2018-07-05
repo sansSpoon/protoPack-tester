@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin'); //dev only
 
-const publicPath = '/';
+const publicPath = '';
 
 module.exports = {
 	target: 'web', // 'node' | 'web'
@@ -21,46 +21,20 @@ module.exports = {
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader,
-/*
-						options: {
-							publicPath: 'assets/css/',
-						},
-*/
 					},
 					'css-loader',
 					'sass-loader',
 				],
 			},
-			/*{
-				test: /\.css$/,
-				use: [
-					{
-						loader: 'style-loader/url',
-						options: {
-							//singleton: true,
-						},
-					},
-					{
-						loader: 'file-loader',
-						options: {
-							name: '[name].[ext]',
-							outputPath: '../css/',
-							publicPath: 'assets/css/'
-						},
-					},
-					'extract-loader',
-					'css-loader',
-				],
-			},*/
 			{
 				test: /\.(png|svg|jpg|gif)$/,
 				use: [
 					{
-						loader: 'file-loader',
+						loader: 'url-loader',
 						options: {
 							name: 'assets/chrome/[name].[ext]',
-							// outputPath: '../chrome/',
-							//publicPath: 'assets/chrome/',
+							limit: 8192,
+							// fallback: 'responsive-loader',
 						},
 					},
 				]
@@ -113,6 +87,6 @@ module.exports = {
 			inject: true,
 			template: path.resolve(__dirname, '_src/_html/index.html'),
 		}),
-		new CleanWebpackPlugin(['public']),
+		new CleanWebpackPlugin(['public']), // might not be needed
 	]
 };
