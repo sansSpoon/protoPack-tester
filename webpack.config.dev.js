@@ -1,19 +1,26 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin'); //dev only
+const autoprefixer = require('autoprefixer');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const webpack = require('webpack');
 
 const publicPath = '';
 
 module.exports = {
 	devtool: "source-map",
 	target: 'web', // 'node' | 'web'
-	// mode: 'development', //mode: 'development', // 'production' | 'development' | 'none' // > Moved to package.json scripts
+	mode: 'development', //mode: 'development', // 'production' | 'development' | 'none' // > Moved to package.json scripts
 	entry: './_src/_js/index.js',
 	output: {
 		filename: 'assets/js/[name].js',
 		pathinfo: true,
 		path: path.resolve(__dirname, 'public'),
 		publicPath: publicPath,
+	},
+	devServer: {
+		// contentBase: path.join(__dirname, 'public'),
+		// hot: true,
 	},
 	module: {
 		rules: [
@@ -26,14 +33,36 @@ module.exports = {
 					{
 						loader: 'css-loader',
 						options: {
-							sourceMap: true,
+							// sourceMap: true,
+							importLoaders: 2,
 						},
 					},
 					// 'resolve-url-loader',
 					{
+						loader: 'postcss-loader',
+						options: {
+							ident: 'postcss',
+							plugins: () => [
+								// require('postcss-flexbugs-fixes'),
+								autoprefixer({
+									browsers: [
+										'Chrome >= 45',
+										'Firefox >= 27',
+										'not Edge < 2000',
+										'not IE < 2000',
+										'iOS >= 7',
+										'Safari >= 7'
+									],
+									// flexbox: 'no-2009',
+								}),
+								require('stylelint')(),
+							],
+						},
+					},
+					{
 						loader: 'sass-loader',
 						options: {
-							sourceMap: true,
+							// sourceMap: true,
 						},
 					}
 				],
@@ -45,7 +74,7 @@ module.exports = {
 						loader: 'url-loader',
 						options: {
 							name: 'assets/chrome/[name].[ext]',
-							limit: 8192,
+							limit: 1024, // 8192
 							// fallback: 'responsive-loader',
 							
 						},
@@ -95,5 +124,13 @@ module.exports = {
 			template: path.resolve(__dirname, '_src/_html/index.html'),
 		}),
 		new CleanWebpackPlugin(['public']), // might not be needed
+		new StyleLintPlugin({
+			configFile: './.stylelintrc.json',
+			context: '_src',
+			files: '**/*.scss', // '**/*.s?(a|c)ss'
+			emitErrors: false,
+			failOnError: false,
+		}),
+		new webpack.HotModuleReplacementPlugin()
 	],
 };

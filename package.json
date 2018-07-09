@@ -5,11 +5,13 @@
 	"private": true,
 	"scripts": {
 		"build": "webpack --config webpack.config.prd.js --mode production",
-		"dev": "webpack --config webpack.config.dev.js --mode development"
+		"dev": "webpack --config webpack.config.dev.js --mode development",
+		"start": "webpack-dev-server --config webpack.config.dev.js --open"
 	},
 	"author": "sansSpoon",
 	"license": "ISC",
 	"devDependencies": {
+		"autoprefixer": "^8.6.4",
 		"babel-core": "^6.26.3",
 		"babel-loader": "^7.1.4",
 		"babel-preset-airbnb": "^2.5.1",
@@ -29,6 +31,10 @@
 		"resolve-url-loader": "^2.3.0",
 		"sass-loader": "^7.0.3",
 		"style-loader": "^0.21.0",
+		"stylelint": "^9.3.0",
+		"stylelint-config-standard": "^18.2.0",
+		"stylelint-order": "^0.8.1",
+		"stylelint-webpack-plugin": "^0.10.5",
 		"url-loader": "^1.0.1",
 		"webpack": "^4.12.2",
 		"webpack-cli": "^3.0.8",

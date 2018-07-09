@@ -1,6 +1,9 @@
 @import 'variables.scss';
 
 .hello {
-  color: $wp-orange;
-  background: url('./pic.jpg') ;
+	font-feature-settings: 'kern' 1, 'liga' 1, 'dlig' 1, 'swsh' 1;
+
+	color: $wp-orange;
+
+	background: url('./pic.jpg');
 }

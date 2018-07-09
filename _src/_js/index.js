@@ -1,4 +1,5 @@
 import '../_sass/style.scss';
+import include from './include';
 
 function component() {
 	const element = document.createElement('div');
@@ -10,3 +11,4 @@ function component() {
 }
 
 document.body.appendChild(component());
+document.body.appendChild(include());
