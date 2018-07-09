@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin'); //dev only
 const autoprefixer = require('autoprefixer');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 
 const publicPath = '';
 
@@ -131,6 +131,6 @@ module.exports = {
 			emitErrors: false,
 			failOnError: false,
 		}),
-		new webpack.HotModuleReplacementPlugin()
+		// new webpack.HotModuleReplacementPlugin()
 	],
 };

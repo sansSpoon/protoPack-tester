@@ -2,6 +2,8 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin'); //dev only
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
 
 const publicPath = '';
 
@@ -13,6 +15,29 @@ module.exports = {
 		filename: 'assets/js/[name].js',
 		path: path.resolve(__dirname, 'public'),
 		publicPath: publicPath,
+	},
+	optimization: {
+		minimizer: [
+			new UglifyJsPlugin({
+				sourceMap: true,
+				extractComments: true,
+				uglifyOptions: {
+					ecma: 8,
+					warnings: false,
+					safari10: true,
+					parse: {},
+					compress: {},
+					mangle: {
+						safari10: true,
+					},
+					output: {
+						comments: false,
+						beautify: false,
+					},
+					sourceMap: {},
+				},
+			})
+		],
 	},
 	module: {
 		rules: [
@@ -42,6 +67,7 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: /node_modules/,
+				sideEffects: false,
 				use: [
 					{
 						loader: 'babel-loader',
@@ -74,6 +100,7 @@ module.exports = {
 					}
 				]
 			},
+			{}
 		],
 	},
 	plugins: [
