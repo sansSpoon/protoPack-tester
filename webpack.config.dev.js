@@ -3,12 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin'); //dev only
 const autoprefixer = require('autoprefixer');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
-// const webpack = require('webpack');
+const webpack = require('webpack');
 
 const publicPath = '';
 
 module.exports = {
-	devtool: "source-map",
+	devtool: 'inline-source-map',
 	target: 'web', // 'node' | 'web'
 	mode: 'development', //mode: 'development', // 'production' | 'development' | 'none' // > Moved to package.json scripts
 	entry: './_src/_js/index.js',
@@ -44,18 +44,11 @@ module.exports = {
 							ident: 'postcss',
 							plugins: () => [
 								// require('postcss-flexbugs-fixes'),
-								autoprefixer({
-									browsers: [
-										'Chrome >= 45',
-										'Firefox >= 27',
-										'not Edge < 2000',
-										'not IE < 2000',
-										'iOS >= 7',
-										'Safari >= 7'
-									],
-									// flexbox: 'no-2009',
-								}),
-								require('stylelint')(),
+								// require('stylelint')(),
+								// autoprefixer(),
+								
+								// require('autoprefixer')(),
+								// require('cssnano')(),
 							],
 						},
 					},
@@ -130,6 +123,9 @@ module.exports = {
 			files: '**/*.scss', // '**/*.s?(a|c)ss'
 			emitErrors: false,
 			failOnError: false,
+		}),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('development'),
 		}),
 		// new webpack.HotModuleReplacementPlugin()
 	],

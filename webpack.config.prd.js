@@ -3,11 +3,13 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin'); //dev only
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 
 const publicPath = '';
 
 module.exports = {
+	devtool: 'source-map',
 	target: 'web', // 'node' | 'web'
 	//mode: 'development', // 'production' | 'development' | 'none' // > Moved to package.json scripts
 	entry: './_src/_js/index.js',
@@ -38,6 +40,9 @@ module.exports = {
 				},
 			})
 		],
+		splitChunks: {
+			chunks: 'all',
+		}
 	},
 	module: {
 		rules: [
@@ -47,8 +52,49 @@ module.exports = {
 					{
 						loader: MiniCssExtractPlugin.loader,
 					},
-					'css-loader',
-					'sass-loader',
+					{
+						loader: 'css-loader',
+						options: {
+							importLoaders: 1,
+							// minimize: true, // depreciated
+							// sourceMap: true,
+						},
+					},
+					{
+						loader: 'postcss-loader',
+						options: {
+							ident: 'postcss',
+							config: {
+								ctx: {
+									autoprefixer: {
+										browsers: [
+											'Chrome >= 45',
+											'Firefox >= 27',
+											'not Edge < 2000',
+											'not IE < 2000',
+											'iOS >= 7',
+											'Safari >= 7'
+										],
+										// flexbox: 'no-2009',
+									},
+									cssnano: {},
+								},
+							},
+							plugins: () => [
+								// require('postcss-flexbugs-fixes'),
+								// require('stylelint')(),
+								// autoprefixer(),
+								require('autoprefixer')(),
+								require('cssnano')(),
+							],
+						},
+					},
+					{
+						loader: 'sass-loader',
+						options: {
+							// sourceMap: true,
+						},
+					}
 				],
 			},
 			{
@@ -99,8 +145,7 @@ module.exports = {
 						},
 					}
 				]
-			},
-			{}
+			}
 		],
 	},
 	plugins: [
@@ -113,6 +158,9 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			inject: true,
 			template: path.resolve(__dirname, '_src/_html/index.html'),
+		}),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('production'),
 		}),
 		new CleanWebpackPlugin(['public']), // might not be needed
 	]
