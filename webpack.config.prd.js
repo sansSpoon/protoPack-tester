@@ -6,7 +6,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
 
-const publicPath = '';
+const publicPath = '/test/';
 
 module.exports = {
 	devtool: 'source-map',
@@ -51,6 +51,13 @@ module.exports = {
 				use: [
 					{
 						loader: MiniCssExtractPlugin.loader,
+/*
+						options: {
+							// you can specify a publicPath here
+							// by default it use publicPath in webpackOptions.output
+							publicPath: '../'
+						}
+*/
 					},
 					{
 						loader: 'css-loader',
@@ -104,7 +111,7 @@ module.exports = {
 						loader: 'url-loader',
 						options: {
 							name: 'assets/chrome/[name].[ext]',
-							limit: 8192,
+							limit: 1024, //8192,
 							// fallback: 'responsive-loader',
 						},
 					},
